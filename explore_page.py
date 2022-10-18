@@ -7,13 +7,18 @@ import seaborn as sns
 
 import pickle
 
-# Read the data
-@st.cache
-def load_data():
-    data = pd.read_csv('data/df_train.csv')
+# Load the model
+def load_model():
+    with open('saved_steps.pkl', 'rb') as f:
+        data = pickle.load(f)
     return data
 
-df_train = load_data()
+data = load_model()
+
+model = data['model']
+le_horse_name = data['le_horse_name']
+le_jockey = data['le_jockey']
+df_train = data['dataset']
 
 # define function to show data
 def show_explore_page():
