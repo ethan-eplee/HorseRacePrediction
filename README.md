@@ -49,6 +49,8 @@ The work was done in 7 seperate notebooks.
 6. Backtesting - Using betting strategy to answer the problem statement of whether we can profit from horse races
 7. Deployment - To build an application using Streamlit, where punters can key in simplified inputs to get a prediction on whether to bet on a horse.
 
+The deployed app was deployed to Streamlit and can be accessed through this [link](https://ethan-horseraceprediction.streamlitapp.com/).
+
 
 **SIGNIFICANT FINDINGS**
 
