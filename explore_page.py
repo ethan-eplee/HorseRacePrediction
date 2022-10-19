@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 import pickle
+from PIL import Image
 
 # Load the model
 def load_model():
@@ -15,9 +16,8 @@ def load_model():
 data = load_model()
 
 model = data['model']
-le_horse_name = data['le_horse_name']
-le_jockey = data['le_jockey']
-df_train = data['dataset']
+df_test = data['test_data']
+df_train = data['train_data']
 
 # define function to show data
 def show_explore_page():
@@ -27,10 +27,15 @@ def show_explore_page():
         Hong Kong Jockey Club. The dataset contains the race results of 1561 local \
         races from 2014 to 2017. 
 
-        ### On average, betting on all horses equally will incur a loss of 17.5%.\
+        ### On average, betting on all horses equally will incur a loss of 17.5%. \
+        If we were to bet on the horse with the lowest odds at every race, chances are that you will \
+            be losing quite abit over the long run. \
          Let's see if we can do better using machine learning!
         """)
 
+    image1 = Image.open('./images/bet_lowest_odds.png')
+    st.image(image1, caption='Betting at each race on the horse with the lowest odds',\
+         use_column_width=True)
     #---------------------------------------------------------------------------------- 
     # insert new line
     
