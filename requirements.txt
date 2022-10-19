@@ -17,3 +17,4 @@ Shapely==1.8.5.post1
 streamlit==1.13.0
 streamlit-shap==1.0.2
 xgboost==1.6.2
+imbalanced-learn==0.9.1
