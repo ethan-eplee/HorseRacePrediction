@@ -21,16 +21,17 @@ df_train = data['train_data']
 
 # define function to show data
 def show_explore_page():
-    st.title("A Primer into Horse Racing")
+    st.title("Using statistical models to predict horse racing results")
     st.write("""
-        ### This data analysis was done from a dataset of horse racing data from \
-        Hong Kong Jockey Club. The dataset contains the race results of 1561 local \
+        #### Data analysis and backtesting was done on a dataset of horse racing data from \
+        Hong Kong Jockey Club. The dataset contains the race results of more than 2000 local \
         races from 2014 to 2017. 
 
-        ### On average, betting on all horses equally will incur a loss of 17.5%. \
-        If we were to bet on the horse with the lowest odds at every race, chances are that you will \
-            be losing quite abit over the long run. \
-         Let's see if we can do better using machine learning!
+        #### On average, betting equally on all horses will incur a loss of 17.5%. \
+        Even if we were to bet on the horse with the lowest odds at every race, chances are that you will \
+            be losing quite abit over the long run.
+
+        #### Let's see if we can provide some useful insights here!
         """)
 
     image1 = Image.open('./images/bet_lowest_odds.png')

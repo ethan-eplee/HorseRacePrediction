@@ -17,7 +17,7 @@ df_train = data['train_data']
 
 # define show prediction function
 def show_predict_page():
-    st.title("Horse Winning Prediction")
+    st.title("Will your horse win?! 🐎")
 
     st.write("""### We need some information to predict whether you should place your bets on the horse!""")
 

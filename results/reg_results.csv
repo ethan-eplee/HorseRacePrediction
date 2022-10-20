@@ -1,5 +1,5 @@
 ,Model,RMSE_train,RMSE_test,Generalization,Top1_Train_Accuracy,Top1_Test_Accuracy,Top3_Train_Accuracy,Top3_Test_Accuracy
-0,Ridge,2.492,2.597,4.213,0.182,0.222,0.366,0.392
+0,Ridge,2.283,2.393,4.818,0.184,0.23,0.371,0.392
 1,KNeighborsRegressor,4.048,4.168,2.964,0.142,0.167,0.299,0.31
-2,RandomForestRegressor,1.97,2.134,8.325,0.18,0.207,0.371,0.403
-3,LGBMRegressor,2.494,2.647,6.135,0.222,0.274,0.411,0.455
+2,RandomForestRegressor,2.42,2.563,5.909,0.169,0.18,0.374,0.382
+3,LGBMRegressor,2.526,2.649,4.869,0.226,0.316,0.416,0.485
