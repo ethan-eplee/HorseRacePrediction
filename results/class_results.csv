@@ -1,9 +1,9 @@
 Model,Prediction,CV,F1 Score,AUC,TPR
-LogisticRegression,HorseWin,0.886,0.885,0.106,0.027
-LogisticRegression,HorseRankTop3,0.774,0.744,0.34,0.252
-GaussianNB,HorseWin,0.873,0.867,0.136,0.349
-GaussianNB,HorseRankTop3,0.748,0.726,0.359,0.603
-RandomForestClassifier,HorseWin,0.899,0.893,0.128,0.084
-RandomForestClassifier,HorseRankTop3,0.78,0.751,0.354,0.266
-Pipeline,HorseWin,0.863,0.861,0.151,0.441
-Pipeline,HorseRankTop3,0.767,0.75,0.383,0.605
+LogisticRegression,HorseWin,0.89,0.888,0.115,0.05
+LogisticRegression,HorseRankTop3,0.769,0.739,0.334,0.238
+GaussianNB,HorseWin,0.891,0.893,0.129,0.163
+GaussianNB,HorseRankTop3,0.767,0.744,0.339,0.354
+RandomForestClassifier,HorseWin,0.898,0.894,0.135,0.086
+RandomForestClassifier,HorseRankTop3,0.768,0.738,0.332,0.233
+Pipeline,HorseWin,0.866,0.863,0.131,0.347
+Pipeline,HorseRankTop3,0.757,0.722,0.339,0.517
