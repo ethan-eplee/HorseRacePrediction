@@ -5,5 +5,5 @@ GaussianNB,HorseWin,0.892,0.889,0.121,0.184,0.304
 GaussianNB,HorseRankTop3,0.77,0.755,0.348,0.39,0.518
 RandomForestClassifier,HorseWin,0.899,0.895,0.131,0.087,0.661
 RandomForestClassifier,HorseRankTop3,0.769,0.75,0.337,0.267,0.605
-Pipeline,HorseWin,0.883,0.715,0.107,0.597,0.124
-Pipeline,HorseRankTop3,0.763,0.634,0.322,0.753,0.35
+Pipeline,HorseWin,0.834,0.723,0.11,0.606,0.129
+Pipeline,HorseRankTop3,0.743,0.65,0.331,0.753,0.361
