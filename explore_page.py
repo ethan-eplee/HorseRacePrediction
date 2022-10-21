@@ -28,65 +28,47 @@ def show_explore_page():
         races from 2014 to 2017. 
 
         #### On average, betting equally on all horses will incur a loss of 17.5%. \
-        Even if we were to bet on the horse with the lowest odds at every race, chances are that you will \
+        Even if we were to only bet on the horse with the lowest odds at every race, chances are that you will \
             be losing quite abit over the long run.
-
-        #### Let's see if we can provide some useful insights here!
         """)
 
-    image1 = Image.open('./images/bet_lowest_odds.png')
+    image1 = Image.open('./images/bet_lowest_odds.jpg')
     st.image(image1, caption='Betting at each race on the horse with the lowest odds',\
          use_column_width=True)
+
+    st.write("""
+        #### Our backtesting results show that using a statistical model to predict horse racing \
+        can yield better performance.
+        """)
+
+    image2 = Image.open('./images/deployment.jpg')
+    st.image(image2, caption='Betting at each race using our app prediction',\
+         use_column_width=True)
+
     #---------------------------------------------------------------------------------- 
     # insert new line
     
     st.write("")
-    st.write("""#### Number of Horses per Race""")
+    st.write("""#### Winning Odds""")
 
-    # Plot the distribution of the number of horses
+    # Plot mean of win odds against finishings
     fig1 = plt.figure(figsize=(10, 5))
-    numHorsePerRace = df_train.groupby('race_id')['horse_id'].count().value_counts()
-    sns.barplot(x=numHorsePerRace.index, y=numHorsePerRace.values)
-    plt.xlabel('Number of Horses', fontsize=12)
-    plt.ylabel
-    plt.title('Number of Horses per Race', fontsize=15)
+    sns.barplot(x=df_train['finishing_position'].unique(), y=df_train.groupby('finishing_position')['win_odds'].mean(), palette='Greens_d')
+    plt.xlabel('Finishing Position', fontsize=12)
+    plt.ylabel('Mean Win Odds', fontsize=12)
+    plt.title('Mean Win Odds against Finishing Position', fontsize=15)
     st.pyplot(fig1)
 
     # Describe the data
-    st.write("""The most common number of horses per race is 12. The maximum number of horses \
-            per race is 14.""")
-
+    st.write("""A horse with lower odds usually finishes higher. However this does not mean\
+        that you should only bet on the horse with the lowest odds. Other factors also contribute\
+            to the horse's finishing position. For example, the horse's weight, jockey's weight \
+                """)
     #---------------------------------------------------------------------------------- 
-    # insert new line
-    st.write("")
-    st.write("""#### Distribution of a Horse's Weight""")   
-
-    # Draw the mean of a horse weight on same plot
-    fig2 = plt.figure(figsize=(10, 6))
-    sns.distplot(df_train['declared_horse_weight'], bins=100, kde=False)
-    plt.title("Distribution of a horse weight")
-    plt.xlabel("Weight")
-    plt.ylabel("Count")
-    plt.axvline(df_train['declared_horse_weight'].mean(), color='r', linestyle='dashed', linewidth=2)
-    plt.show()
-    st.pyplot(fig2)
-    
-    # Describe the data
-    st.write("""The weight of a horse can vary from 900 to 1360kg. The average \
-        weight of a horse is 1160kg. The distribution is skewed to the right.""")
-
-    #----------------------------------------------------------------------------------
+ 
     # insert new line
     st.write("")
     st.write("""#### Weight Handicap""")
-
-    # Plot the distribution of actual weight
-    fig3= plt.figure(figsize=(10, 5))
-    sns.distplot(df_train['actual_weight'], kde=False)
-    plt.xlabel('Actual Weight', fontsize=12)
-    plt.ylabel('Count', fontsize=12)
-    plt.title('Distribution of Weights Carried', fontsize=15)
-    st.pyplot(fig3)
 
     # Find the mean of actual weight for each horse number
     meanWtPerHorse = df_train.groupby('horse_number')['actual_weight'].mean()
@@ -95,17 +77,17 @@ def show_explore_page():
     meanWtPerHorse.index = meanWtPerHorse.index.astype(int)
 
     # Plot the distribution of mean actual weight for each horse number
-    fig4 = plt.figure(figsize=(10, 5))
-    sns.barplot(x=meanWtPerHorse.index, y=meanWtPerHorse.values)
+    fig2= plt.figure(figsize=(10, 5))
+    sns.barplot(x=meanWtPerHorse.index.astype(int), y=meanWtPerHorse.values, palette='Greens_d')
     plt.xlabel('Horse Number', fontsize=12)
-    plt.ylabel('Mean Weight Handicap (lbs)', fontsize=12)
-    plt.title('Mean Weight Handicap for Each Horse Number', fontsize=15)
-    st.pyplot(fig4)
+    plt.ylabel('Mean Actual Weight', fontsize=12)
+    plt.title('Distribution of Mean Weight Handicap for Each Horse Number', fontsize=15)
+    st.pyplot(fig2)
 
     # Describe the data
-    st.write("Hong Kong horse racing uses a weight handicap system. The weight ranges from \
-            100lbs to 133lbs. The average weight carried is 95lbs. The distribution is skewed to the right. \
-            Horse number indicates a higher rating, and usually Horse Number 1 carries the most weight.")
+    st.write("Hong Kong horse racing uses a weight handicap system to make races more competitive. The weight ranges from \
+            100lbs to 133lbs. The average weight carried is around 95lbs. \
+            The horse number indicates a higher rating, and usually Horse Number 1 carries the most weight.")
 
     #----------------------------------------------------------------------------------
     # insert new line
@@ -116,12 +98,12 @@ def show_explore_page():
     avgPos_vs_Draw = df_train.groupby('draw')['finishing_position'].mean()[:14]
 
     # Plot the distribution of average finishing position against draw
-    fig5 = plt.figure(figsize=(10, 5))
-    sns.barplot(x=avgPos_vs_Draw.index, y=avgPos_vs_Draw.values)
+    fig3 = plt.figure(figsize=(10, 5))
+    sns.barplot(x=avgPos_vs_Draw.index, y=avgPos_vs_Draw.values, palette='Greens_d')
     plt.xlabel('Draw', fontsize=12)
     plt.ylabel('Average Finishing Position', fontsize=12)
-    plt.title('Distribution of Average Finishing Position against Draw', fontsize=15)
-    st.pyplot(fig5)
+    plt.title('Distribution of Draw against Average Finishing Position ', fontsize=15)
+    st.pyplot(fig3)
 
     # Describe the data
     st.write("""Draw is the position of the horse in the starting gate. The average finishing position \
@@ -134,7 +116,7 @@ def show_explore_page():
     st.write("""#### Race Type/ Distance""")
 
     # Plot the distribution of race distance
-    fig6 = plt.figure(figsize=(10, 5))
+    fig4 = plt.figure(figsize=(10, 5))
     
     # Do a groupby to see distribution
     df_racetype = df_train[['race_id', 'race_distance']].\
@@ -145,105 +127,50 @@ def show_explore_page():
     plt.xlabel("Race Distance (m)", fontsize=12)
     plt.ylabel("Count", fontsize=12)
     plt.title("Distribution of Race Types", fontsize=15)
-    st.pyplot(fig6)
+    st.pyplot(fig4)
 
     # Describe the data
-    st.write("""The most popular race distance is 1200m. The longer distances races are \
-        not as popular as the shorter distances.""")
+    st.write("""There are different race distances. Like humans, horses have different \
+            strengths and weaknesses. Some horses are better at longer distances, \
+                while others are better at shorter distances. \
+                    """)
     
     #----------------------------------------------------------------------------------
     # insert new line
     st.write("")
-    st.write("""#### Correlation between Winning Position and Other Variables""")
+    st.write("""#### The Form Factor""")
+
+    # keep only features we want
+    cols = ['finishing_position', 'actual_weight', 'declared_horse_weight', \
+        'draw', 'recent_ave_rank', \
+        'jockey_ave_rank','trainer_ave_rank', 'race_distance']
 
     # view the correlation matrix
-    corr = df_train.corr()
+    corr = df_train[cols].corr()
 
     # do a mask to hide the upper triangle
     mask = np.zeros_like(corr, dtype=np.bool)
     mask[np.triu_indices_from(mask)] = True
 
     # plot the heatmap with the mask and correct aspect ratio
-    fig6 = plt.figure(figsize=(15, 10))
+    fig5 = plt.figure(figsize=(15, 10))
     sns.heatmap(corr, mask=mask, cmap='coolwarm', vmax=1, vmin=-1, 
                 center=0, square=False, linewidths=.5, 
                 cbar_kws={"shrink": .8}, annot=True)
     plt.title('Correlation Matrix', fontsize=15)
-    st.pyplot(fig6)
+    st.pyplot(fig5)
 
     # Describe the data
-    st.write("""There is a positive correlation between the winning position and race odds. Recent \
-        performances of the jockey and horse also seems to have an effect on the winning position.""")
-
-    #----------------------------------------------------------------------------------
-    # insert new line
-    st.write("")
-    st.write("""#### Jockeys to Watch""")
-
-    # Finding the number of wins per jockey
-    jockeyWins = df_train.groupby('jockey')['finishing_position'].apply(lambda x: (x==1).sum())
-
-    # Finding the win rate per jockey
-    jockeyWinRate = df_train.groupby('jockey')['HorseWin'].mean()
-
-    # Plot win rate against number of wins
-    fig7 = plt.figure(figsize=(10, 5))
-    sns.scatterplot(x=jockeyWinRate, y=jockeyWins)
-    plt.xlabel('Win Rate', fontsize=12)
-    plt.ylabel('Number of Wins', fontsize=12)
-    plt.title('Distribution of Win Rate against Number of Wins', fontsize=15)
-
-    # Annotate the top 5 jockeys with the most wins
-    for i in jockeyWins.sort_values(ascending=False)[:5].index:
-        plt.annotate(i, (jockeyWinRate[i], jockeyWins[i]))
-
-    # Annotation for the top 5 jockeys with the highest win rate
-    for i in jockeyWinRate.sort_values(ascending=False)[:5].index:
-        plt.annotate(i, (jockeyWinRate[i], jockeyWins[i]))
-    
-    st.pyplot(fig7)
-
-    # Describe the data
-    st.write("""The top jockeys with the most wins as well as high win rates are Zac Purton \
-        and Joao Moreira.""")
-
-    #----------------------------------------------------------------------------------
-    # insert new line
-    st.write("")
-    st.write("""#### Horses to Watch""")
-
-    # Find the number of wins per horse
-    horseWins = df_train.groupby('horse_name')['finishing_position'].apply(lambda x: (x==1).sum())
-
-    # Find the win rate per horse
-    horseWinRate = df_train.groupby('horse_name')['HorseWin'].mean()
-
-    # Plot win rate against number of wins
-    fig8 = plt.figure(figsize=(15, 10))
-    sns.scatterplot(x=horseWinRate, y=horseWins)
-    plt.xlabel('Win Rate', fontsize=12)
-    plt.ylabel('Number of Wins', fontsize=12)
-    plt.title('Distribution of Win Rate against Number of Wins', fontsize=15)
-
-    # Annotate the top 5 horses with the most wins
-    for i in horseWins.sort_values(ascending=False)[:3].index:
-        plt.annotate(i, (horseWinRate[i], horseWins[i]))
-
-    # Annotation for the top 5 horses with the highest win rate
-    for i in horseWinRate.sort_values(ascending=False)[3:7].index:
-        plt.annotate(i, (horseWinRate[i], horseWins[i]))
-    
-    st.pyplot(fig8)
-
-    # Describe the data
-    st.write("""The top horses with the most wins as well as high win rates are CONTENTMENT, BLIZZARD \
-        and SUPREME PROFIT.""")
+    st.write("""Recent performances of the jockey and horse seems to have a strong effect \
+        on the winning position. We call this the 'form factor'. The form factor looks to be \
+            the most important factor in predicting the winning position. \
+                """)
 
     #----------------------------------------------------------------------------------
     # insert new line
     st.write("")
     st.write("""#### The Important Question. Can you make money betting on horse racing?""")
 
-    st.write("""The answer is yes! We have done backtesting on multiple models, and 75% of the time, \
-        the model will make a profit. The models are not perfect, and there are times when they will lose money. \
-            However, with more data to train on, the model will be able to make more accurate predictions over time. """)
+    st.write("""While we do not guarantee success with every bet (nobody can!), our prediction\
+        model has shown a recall of 40% and precision of 20%. This means that if you bet on every horse\
+           as predicted by our model, you will win 20% of the time.""")
