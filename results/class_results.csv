@@ -1,9 +1,9 @@
 Model,Prediction,CV-F1,F1 Score,AUC,Recall,Precision
-LogisticRegression,HorseWin,0.89,0.888,0.115,0.05,0.75
-LogisticRegression,HorseRankTop3,0.769,0.739,0.334,0.238,0.62
-GaussianNB,HorseWin,0.892,0.893,0.127,0.146,0.395
-GaussianNB,HorseRankTop3,0.768,0.744,0.337,0.341,0.519
-RandomForestClassifier,HorseWin,0.898,0.894,0.131,0.09,0.632
-RandomForestClassifier,HorseRankTop3,0.768,0.74,0.332,0.25,0.598
-Pipeline,HorseWin,0.866,0.863,0.131,0.347,0.223
-Pipeline,HorseRankTop3,0.757,0.722,0.339,0.517,0.428
+LogisticRegression,HorseWin,0.891,0.891,0.113,0.057,0.667
+LogisticRegression,HorseRankTop3,0.773,0.749,0.337,0.263,0.611
+GaussianNB,HorseWin,0.892,0.889,0.121,0.184,0.304
+GaussianNB,HorseRankTop3,0.77,0.755,0.348,0.39,0.518
+RandomForestClassifier,HorseWin,0.899,0.895,0.131,0.087,0.661
+RandomForestClassifier,HorseRankTop3,0.769,0.75,0.337,0.267,0.605
+Pipeline,HorseWin,0.883,0.715,0.107,0.597,0.124
+Pipeline,HorseRankTop3,0.763,0.634,0.322,0.753,0.35
